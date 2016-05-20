@@ -12,3 +12,20 @@
 */
 
 if(!defined('ABSPATH')) exit;
+
+class PreviewCustomFields {
+  public static $prefix = 'pcf_';
+
+  public static function init() {
+    register_activation_hook(
+      __FILE__,
+      [__CLASS__, self::$prefix . 'activate_plugin']
+    );
+  }
+
+  public function pcf_activate_plugin() {
+    update_option(self::$prefix . 'version', '1.0.0');
+  }
+}
+
+PreviewCustomFields::init();
